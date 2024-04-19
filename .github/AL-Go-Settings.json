@@ -1,4 +1,20 @@
 {
   "type": "PTE",
-  "templateUrl": "https://github.com/microsoft/AL-Go-PTE@PPPreview"
+  "templateUrl": "https://github.com/microsoft/AL-Go-PTE@PPPreview",
+  "currentSchedule": "0 2 * * 1,2,3,4,5",
+  "NextMinorSchedule": "0 2 * * 6",
+  "NextMajorSchedule": "0 2 * * 0",
+  "UpdateGitHubGoSystemFilesSchedule": "0 0 * * *",
+  "shell": "pwsh",
+  "githubRunner": "windows-latest",
+  "githubRunnerShell": "pwsh",
+  "powerPlatformSolutionFolder": "bc-takeOrder",
+  "environments": [
+    "QA"
+  ],
+  "DeployToQA": {
+    "environmentName": "BCOnline",
+    "companyId": "2887748d-9c8e-ee11-be3f-6045bde9b4bf",
+    "ppEnvironmentUrl": "https://orgb2203da6.crm4.dynamics.com/"
+  }
 }

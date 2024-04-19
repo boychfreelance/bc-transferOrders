@@ -1,0 +1,110 @@
+"'Info Screen' As screen":
+    Fill: =varTheme.AppTealLight
+
+    conInfoScreenContent As groupContainer.verticalAutoLayoutContainer:
+        Height: =600
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        X: =Parent.Width/2 - Self.Width/2
+        Y: =Parent.Height/2 - Self.Height/2 
+        ZIndex: =1
+
+        conAboutHeader As groupContainer.horizontalAutoLayoutContainer:
+            Height: =225
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            imgInfoIcon As image:
+                Height: =varTheme.iconSize
+                Image: ='Coffee MR info screen info icon'
+                LayoutMinHeight: =320
+                LayoutMinWidth: =320
+                PaddingBottom: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Width: =varTheme.iconSize
+                X: =Parent.Width - Self.Width
+                ZIndex: =1
+
+            lblInfoHeader As label:
+                Font: =varTheme.font
+                FontWeight: =FontWeight.Semibold
+                Height: =Parent.Height
+                LayoutMinHeight: =70
+                LayoutMinWidth: =560
+                Size: =varTheme.FontSize3
+                Text: ="Business Central sample App"
+                Width: =Parent.Width - imgInfoIcon.Width
+                X: =70
+                ZIndex: =4
+
+        lblInfoText As label:
+            Font: =varTheme.font
+            Height: =300
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            LineHeight: =1.4
+            Size: =varTheme.FontSize3
+            Text: ="This sample Power App connects to Business Central and showcases how mixed reality (MR) can be leveraged to optimize the sales process"
+            Width: =Parent.Width
+            X: =Parent.Width/2 - Self.Width/2
+            ZIndex: =2
+
+        conLearnMore As groupContainer.manualLayoutContainer:
+            Height: =225
+            LayoutMinHeight: =200
+            LayoutMinWidth: =250
+            ZIndex: =3
+
+            lblLearnMoreText As label:
+                Font: =varTheme.font
+                Height: =150
+                LineHeight: =1.4
+                Size: =varTheme.FontSize3
+                Text: ="Read more about Business Central sample app "
+                Width: =Parent.Width
+                X: =Parent.Width/2 - Self.Width/2
+                Y: =
+                ZIndex: =1
+
+            btnLearnMore As button:
+                Align: =Align.Left
+                BorderThickness: =0
+                Color: =varTheme.AppTeal
+                DisabledColor: =varTheme.AppTeal
+                Fill: =RGBA(0, 0, 0, 0)
+                Font: =varTheme.font
+                FontWeight: =FontWeight.Normal
+                Height: =60
+                HoverColor: =varTheme.AppTeal
+                HoverFill: =Color.Transparent
+                Italic: =true
+                OnSelect: |-
+                    =Launch("https://github.com/microsoft/bcsamples-CoffeeMR/")
+                PressedColor: =varTheme.AppTeal
+                PressedFill: =Color.Transparent
+                Size: =varTheme.FontSize3
+                Text: ="here"
+                Underline: =true
+                Width: =100
+                X: =310
+                Y: =70
+                ZIndex: =2
+
+    imgCloseInfoPage As image:
+        Height: =varTheme.iconSize
+        Image: ='Coffee MR info screen dismiss icon'
+        OnSelect: =Back(ScreenTransition.UnCoverRight)
+        PaddingBottom: =varTheme.iconPadding
+        PaddingLeft: =varTheme.iconPadding
+        PaddingRight: =varTheme.iconPadding
+        PaddingTop: =varTheme.iconPadding
+        TabIndex: =0
+        Tooltip: ="Close page"
+        Width: =varTheme.iconSize
+        X: =Parent.Width - Self.Width
+        ZIndex: =3
+

@@ -1,0 +1,27 @@
+comLoadingOverlay As CanvasComponent:
+    Fill: =varTheme.AppTealLight
+    Height: =App.Height
+    Width: =App.Width
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    lblLoadingMessage As label:
+        Align: =Align.Center
+        Color: =
+        Font: =Font.'Segoe UI'
+        Height: =70
+        Size: =26
+        Text: ="Creating Sales Order"
+        Width: =Parent.Width
+        Y: =imgLoadingSpinner.Y + imgLoadingSpinner.Height
+        ZIndex: =3
+
+    imgLoadingSpinner As image:
+        BorderColor: =RGBA(32, 54, 71, 1)
+        Image: ='Coffee-MR_spinner_light-aqua_X2'
+        ImagePosition: =ImagePosition.Fill
+        X: =Parent.Width/2 - Self.Width/2
+        Y: =Parent.Height/2 - Self.Height/2
+        ZIndex: =4
+

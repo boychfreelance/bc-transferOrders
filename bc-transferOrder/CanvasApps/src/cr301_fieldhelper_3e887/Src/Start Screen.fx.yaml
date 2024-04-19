@@ -1,0 +1,97 @@
+"'Start Screen' As screen":
+    Fill: =varTheme.AppGray
+    OnVisible: |-
+        =Set(varSelectedCoffeeMachine, Blank());
+        Set(varMeasurement, Blank());
+
+    conStartSubContent As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height 
+        LayoutAlignItems: =LayoutAlignItems.Center
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =1
+
+        imgLogo As image:
+            Fill: =Color.Transparent
+            Height: =800
+            Image: ='Coffee MR_logotype and logo_x2'
+            LayoutMinHeight: =320
+            LayoutMinWidth: =320
+            PaddingTop: =30
+            Width: =Parent.Width - 46
+            ZIndex: =3
+
+        conStartButtons As groupContainer.verticalAutoLayoutContainer:
+            Height: =386
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =50
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =Parent.Height - 800
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingTop: =20
+            ZIndex: =4
+
+            "'btnStartMeasure&Select' As button":
+                Color: =varTheme.TextLight
+                Fill: =varTheme.AppLightGray
+                Font: =varTheme.font
+                Height: =varTheme.ButtonHeight
+                HoverFill: =ColorFade(Self.Fill, -20%)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =Set(varTakeMeasurement, true);
+                    Navigate('Customer List Screen', ScreenTransition.Cover);
+                PaddingTop: =0
+                PressedFill: =ColorFade(Self.Fill, 20%)
+                RadiusBottomLeft: =50
+                RadiusBottomRight: =50
+                RadiusTopLeft: =50
+                RadiusTopRight: =50
+                Size: =varTheme.FontSize3
+                Text: ="Measure & Select"
+                Width: =varTheme.ButtonSizeBig
+                X: =40
+                Y: =40
+                ZIndex: =1
+
+            btnStartSelect As button:
+                Color: =varTheme.AppLightGray
+                Fill: =varTheme.AppLight
+                Font: =varTheme.font
+                Height: =varTheme.ButtonHeight
+                HoverFill: =ColorFade(Self.Fill, -20%)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =Set(varTakeMeasurement, false);
+                    Navigate('Customer List Screen', ScreenTransition.Cover);
+                PaddingTop: =0
+                RadiusBottomLeft: =50
+                RadiusBottomRight: =50
+                RadiusTopLeft: =50
+                RadiusTopRight: =50
+                Size: =varTheme.FontSize3
+                Text: ="Select"
+                Width: =varTheme.ButtonSizeBig
+                X: =40
+                Y: =40
+                ZIndex: =2
+
+    imgLearnMore As image:
+        Height: =varTheme.iconSize
+        Image: ='Coffee MR start screen info icon'
+        OnSelect: =Navigate('Info Screen', ScreenTransition.Cover)
+        PaddingBottom: =varTheme.iconPadding
+        PaddingLeft: =varTheme.iconPadding
+        PaddingRight: =varTheme.iconPadding
+        PaddingTop: =varTheme.iconPadding
+        TabIndex: =0
+        Tooltip: ="Open Learn More page"
+        Width: =varTheme.iconSize
+        X: =Parent.Width - Self.Width
+        ZIndex: =3
+

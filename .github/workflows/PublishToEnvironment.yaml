@@ -35,7 +35,7 @@ jobs:
       deviceCode: ${{ steps.Authenticate.outputs.deviceCode }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Initialize the workflow
         id: init
@@ -87,7 +87,7 @@ jobs:
                 Write-Host "Using $_ secret as AuthContext"
                 $secretName = $_
               }
-            }
+            }            
           }
           if ($authContext) {
             Write-Host "AuthContext provided in secret $secretName!"
@@ -118,7 +118,7 @@ jobs:
       deviceCode: ${{ needs.Initialization.outputs.deviceCode }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: EnvName
         id: envName
@@ -144,7 +144,7 @@ jobs:
 
       - name: Get Auth context
         uses: microsoft/AL-Go-Actions/ReadAuthContext@PPPreview
-        with:
+        with: 
           shell: pwsh
           envName: ${{ steps.envName.outputs.envName }}
           environment: ${{ steps.envName.outputs.envName }}
@@ -175,7 +175,7 @@ jobs:
           shell: pwsh
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           artifactPath: '.artifacts'
-          deploySettings: ${{ env.deployTo }}
+          deploySettings: ${{ env.deployTo }} 
           authSettings: ${{ env.authContext }}
 
   PostProcess:
@@ -184,7 +184,7 @@ jobs:
     needs: [ Initialization, Deploy ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Finalize the workflow
         id: PostProcess

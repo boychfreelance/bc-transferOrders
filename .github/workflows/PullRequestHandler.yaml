@@ -29,7 +29,7 @@ jobs:
     if: github.event.pull_request.base.repo.full_name != github.event.pull_request.head.repo.full_name
     runs-on: [ windows-latest ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: true
           ref: refs/pull/${{ github.event.number }}/merge
@@ -54,7 +54,7 @@ jobs:
       buildOrderJson: ${{ steps.determineProjectsToBuild.outputs.BuildOrderJson }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           lfs: true
           ref: refs/pull/${{ github.event.number }}/merge
@@ -73,7 +73,7 @@ jobs:
           shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           getEnvironments: '*'
-          
+
       - name: Determine Projects To Build
         id: determineProjectsToBuild
         uses: microsoft/AL-Go-Actions/DetermineProjectsToBuild@PPPreview
@@ -101,11 +101,11 @@ jobs:
       BuildOutputArtifactsName: ${{ steps.calculateArtifactNames.outputs.BuildOutputArtifactsName }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           lfs: true
           ref: refs/pull/${{ github.event.number }}/merge
-    
+
       - name: Download thisbuild artifacts
         if: env.workflowDepth > 1
         uses: actions/download-artifact@v3
@@ -244,7 +244,7 @@ jobs:
     if: (!cancelled())
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           lfs: true
           ref: refs/pull/${{ github.event.number }}/merge

@@ -10,7 +10,6 @@ on:
       environment:
         description: "Environment"
         required: true
-        default: "Staging"
 
 permissions:
   contents: write
@@ -18,7 +17,7 @@ permissions:
 
 defaults:
   run:
-    shell: powershell
+    shell: pwsh
 
 jobs:
   PushChanges:
@@ -32,12 +31,12 @@ jobs:
         id: init
         uses: microsoft/AL-Go-Actions/WorkflowInitialize@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
           eventId: "DO0103"
 
       - name: EnvName
         id: envName
-        shell: powershell
+        shell: pwsh
         run: |
           $ErrorActionPreference = "STOP"
           Set-StrictMode -version 2.0
@@ -47,14 +46,14 @@ jobs:
       - name: Read settings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
 
       - name: Read secrets
         uses: microsoft/AL-Go-Actions/ReadSecrets@PPPreview
         env:
           secrets: ${{ toJson(secrets) }}
         with:
-          shell: powershell
+          shell: pwsh
           settingsJson: ${{ env.Settings }}
           secrets: "${{ steps.envName.outputs.envName }}-AuthContext,${{ steps.envName.outputs.envName }}_AuthContext,AuthContext,${{ steps.envName.outputs.envName }}-EnvironmentName,${{ steps.envName.outputs.envName }}_EnvironmentName,EnvironmentName,projects"
 
@@ -62,13 +61,13 @@ jobs:
         id: authContext
         uses: microsoft/AL-Go-Actions/ReadAuthContext@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
           envName: ${{ steps.envName.outputs.envName }}
           environment: ${{ steps.envName.outputs.envName }}
 
       - name: Set Power Platform solution name
         id: solutionName
-        shell: powershell
+        shell: pwsh
         env:
           _inputSolutionName: ${{ inputs.solutionName }}
         run: |
@@ -85,7 +84,7 @@ jobs:
       - name: Parse DeployToSettings and AuthContext
         uses: microsoft/AL-Go-Actions/ReadPowerPlatformSettings@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           deploySettings: ${{ env.deployTo }} 
           authSettings: ${{ env.authContext }}
@@ -94,7 +93,7 @@ jobs:
         id: BuildPowerPlatform
         uses: microsoft/AL-Go-Actions/BuildPowerPlatform@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           solutionFolder: ${{ env.powerPlatformSolutionFolder }}
           outputFolder: .buildartifacts/PowerPlatformSolution/
@@ -105,7 +104,7 @@ jobs:
       - name: Export and push changes to Power Platform
         uses: microsoft/AL-Go-Actions/DeployPowerPlatform@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           artifactPath: '.buildartifacts'
           deploySettings: ${{ env.deployTo }} 
@@ -115,6 +114,6 @@ jobs:
         if: always()
         uses: microsoft/AL-Go-Actions/WorkflowPostProcess@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
           eventId: "DO0103"
           telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}

@@ -2,13 +2,15 @@ name: ' Test Current'
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * 1,2,3,4,5'
 
 permissions:
   contents: read
 
 defaults:
   run:
-    shell: powershell
+    shell: pwsh
 
 env:
   workflowDepth: 1
@@ -36,21 +38,21 @@ jobs:
         id: init
         uses: microsoft/AL-Go-Actions/WorkflowInitialize@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
           eventId: "DO0101"
 
       - name: Read settings
         id: ReadSettings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           
       - name: Determine Projects To Build
         id: determineProjectsToBuild
         uses: microsoft/AL-Go-Actions/DetermineProjectsToBuild@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
           maxBuildDepth: ${{ env.workflowDepth }}
 
   Build:
@@ -212,6 +214,6 @@ jobs:
         id: PostProcess
         uses: microsoft/AL-Go-Actions/WorkflowPostProcess@PPPreview
         with:
-          shell: powershell
+          shell: pwsh
           eventId: "DO0101"
           telemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}

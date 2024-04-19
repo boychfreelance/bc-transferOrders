@@ -30,7 +30,7 @@ jobs:
       buildOrderJson: ${{ steps.determineProjectsToBuild.outputs.BuildOrderJson }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           lfs: true
 
@@ -47,7 +47,7 @@ jobs:
         with:
           shell: pwsh
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
-
+          
       - name: Determine Projects To Build
         id: determineProjectsToBuild
         uses: microsoft/AL-Go-Actions/DetermineProjectsToBuild@PPPreview
@@ -73,10 +73,10 @@ jobs:
       BuildOutputArtifactsName: ${{ steps.calculateArtifactNames.outputs.BuildOutputArtifactsName }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           lfs: true
-
+    
       - name: Download thisbuild artifacts
         if: env.workflowDepth > 1
         uses: actions/download-artifact@v3
@@ -152,7 +152,7 @@ jobs:
           path: '${{ matrix.project }}/.buildartifacts/TestApps/'
           if-no-files-found: ignore
           retention-days: 1
-
+      
       - name: Publish artifacts - build output
         uses: actions/upload-artifact@v3
         if: (success() || failure()) && (hashFiles(format('{0}/BuildOutput.txt',matrix.project)) != '')
@@ -208,7 +208,7 @@ jobs:
     needs: [ Initialization, Build ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Finalize the workflow
         id: PostProcess

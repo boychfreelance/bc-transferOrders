@@ -29,7 +29,7 @@ jobs:
     name: Pull changes from ${{ inputs.environment }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Initialize the workflow
         id: init
@@ -60,7 +60,7 @@ jobs:
           shell: pwsh
           settingsJson: ${{ env.Settings }}
           secrets: "${{ steps.envName.outputs.envName }}-AuthContext,${{ steps.envName.outputs.envName }}_AuthContext,AuthContext,${{ steps.envName.outputs.envName }}-EnvironmentName,${{ steps.envName.outputs.envName }}_EnvironmentName,EnvironmentName,projects"
-
+      
       - name: read auth context
         id: authContext
         uses: microsoft/AL-Go-Actions/ReadAuthContext@PPPreview
@@ -72,7 +72,7 @@ jobs:
       - name: Set Power Platform solution name
         id: solutionName
         shell: pwsh
-        env:
+        env: 
           _inputSolutionName: ${{ inputs.solutionName }}
         run: |
           $ErrorActionPreference = "STOP"
@@ -83,15 +83,15 @@ jobs:
             $solutionName = $env:powerPlatformSolutionFolder
           }
           write-host "Solution name: $solutionName"
-          Add-Content -Path $env:GITHUB_ENV -Value "powerPlatformSolutionFolder=$solutionName"
+          Add-Content -Path $env:GITHUB_ENV -Value "powerPlatformSolutionFolder=$solutionName"   
 
-      - name: Export changes from Power Platform
+      - name: Export changes from Power Platform 
         uses: microsoft/AL-Go-Actions/PullPowerPlatformChanges@PPPreview
-        with:
+        with: 
           shell: pwsh
           solutionName: ${{ env.powerPlatformSolutionFolder }}
           directCommit: ${{ inputs.directCommit == 'Y' }}
-          deploySettings: ${{ env.deployTo }}
+          deploySettings: ${{ env.deployTo }} 
           authSettings: ${{ env.authContext }}
 
       - name: Finalize the workflow

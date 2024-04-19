@@ -25,7 +25,7 @@ jobs:
     name: Push changes to ${{ inputs.environment }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Initialize the workflow
         id: init
@@ -86,7 +86,7 @@ jobs:
         with:
           shell: pwsh
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
-          deploySettings: ${{ env.deployTo }}
+          deploySettings: ${{ env.deployTo }} 
           authSettings: ${{ env.authContext }}
 
       - name: Build PowerPlatform Solution
@@ -100,14 +100,14 @@ jobs:
           outputFileName: tempsolution-PowerPlatformSolution-
           environmentName: ${{ env.environmentName }}
           companyId: ${{ env.companyId }}
-
+      
       - name: Export and push changes to Power Platform
         uses: microsoft/AL-Go-Actions/DeployPowerPlatform@PPPreview
         with:
           shell: pwsh
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           artifactPath: '.buildartifacts'
-          deploySettings: ${{ env.deployTo }}
+          deploySettings: ${{ env.deployTo }} 
           authSettings: ${{ env.authContext }}
 
       - name: Finalize the workflow

@@ -8,13 +8,13 @@
   "shell": "pwsh",
   "githubRunner": "windows-latest",
   "githubRunnerShell": "pwsh",
-  "powerPlatformSolutionFolder": "bc-takeOrder",
+  "powerPlatformSolutionFolder": "bc-transferOrder",
   "environments": [
     "QA"
   ],
   "DeployToQA": {
-    "environmentName": "BCOnline",
-    "companyId": "2887748d-9c8e-ee11-be3f-6045bde9b4bf",
+    "environmentName": "Sandbox",
+    "companyId": "5736fe89-41bc-ee11-907d-6045bdc8c244",
     "ppEnvironmentUrl": "https://orgb2203da6.crm4.dynamics.com/"
   }
 }

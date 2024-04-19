@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ImportExportXml version="9.2.24014.212" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
-    <UniqueName>CoffeMR</UniqueName>
+    <UniqueName>bc-transferOrder</UniqueName>
     <LocalizedNames>
       <LocalizedName description="bc-transferOrder" languagecode="1033" />
     </LocalizedNames>

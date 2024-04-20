@@ -1,0 +1,177 @@
+{
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/*.alcache": true,
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "*.app": true
+    },
+    "editor.formatOnSave": true,
+    "editor.suggestSelection": "first",
+    "editor.snippetSuggestions": "bottom",
+    //GIT
+    "git.enableSmartCommit": false,
+    "git.suggestSmartCommit": false,
+    "git.postCommitCommand": "push",
+    "git.autofetch": true,
+    //AL language
+    "al.codeAnalyzers": [
+        "${AppSourceCop}",
+        "${CodeCop}",
+        "${PerTenantExtensionCop}",
+        "${UICop}"
+    ],
+    "al.enableCodeAnalysis": true,
+    "al.backgroundCodeAnalysis": false,
+    "al.enableCodeActions": true,
+    "al.browser": "Edge",
+	"al.algoSuggestedFolder": "C:\\_Source\\Community\\Repos",
+    "al.compilerOptions": "",
+    //"al.compilationOptions": {
+    //	"delayAfterLastDocumentChange": 5000,
+    //	"delayAfterLastProjectChange": 5000,
+    //	"parallel": true,
+    //},
+    "[al]": {
+        "editor.rulers": [
+            120
+        ],
+        "editor.wordBasedSuggestions": "off",
+        "editor.suggestSelection": "first",
+        "editor.formatOnSave": true,
+        "editor.semanticHighlighting.enabled": true,
+        "editor.defaultFormatter": "ms-dynamics-smb.al"
+    },
+    //CRS
+    "CRS.DependencyGraph.ExcludePublishers": [
+        "Microsoft"
+    ],
+    "CRS.DependencyGraph.IncludeTestApps": false,
+    "CRS.OnSaveAlFileAction": "Rename",
+    "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.RenameWithGit": false,
+    "al-xml-doc.CheckProcedureDocumentationInformationLevel": "Disabled",
+    "al-xml-doc.CheckObjectDocumentationInformationLevel": "Disabled",
+    "alOutline.defaultDataClassification": "CustomerContent",
+    "alOutline.completionProviders": [
+        "VariableNamesWithType",
+        "VariableDataTypes"
+    ],
+    "alOutline.enableCodeCopFixes": true,
+    "alOutline.pageFieldToolTipComment": "",
+    "alOutline.pageFieldToolTip": " ",
+    "alOutline.codeActionsOnSave": [
+        "FormatDocument",
+        "SortCustomizations",
+        "SortPermissions",
+        "SortPermissionSetList",
+        "SortProcedures",
+        "SortProperties",
+        "SortReportColumns",
+        "SortTableFields",
+        "SortVariables"
+    ],
+    "alOutline.defaultApiPublisher": "cronus",
+    "alOutline.defaultApiGroup": "data",
+    "alOutline.defaultApiVersion": "v1.0",
+    "alOutline.createApiFieldsCaptions": false,
+    "alOutline.apiFieldNamesConversion": [
+        {
+            "searchRegExp": "^lineNo$",
+            "newValue": "sequence"
+        },
+        {
+            "searchRegExp": "^no$",
+            "newValue": "number"
+        },
+        {
+            "searchRegExp": "No$",
+            "newValue": "number"
+        },
+        {
+            "searchRegExp": "^systemId$",
+            "newValue": "id"
+        },
+        {
+            "searchRegExp": "^systemModifiedAt$",
+            "newValue": "lastModifiedDateTime"
+        },
+    ],
+    //errorLens
+    "errorLens.fontSize": "9",
+    "errorLens.fontWeight": "100",
+    "errorLens.fontStyleItalic": true,
+    "errorLens.exclude": [
+        ".*ha an ID of.*"
+    ],
+    //screencastMode
+    "screencastMode.verticalOffset": 0,
+    "screencastMode.fontSize": 40,
+    //unimportant
+    "todo-tree.highlights.enabled": true,
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "XXX",
+        "[ ]",
+        "[x]"
+    ],
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "DotJoshJohnson.xml"
+    },
+    //Editor
+    "editor.guides.bracketPairs": true,
+    "editor.stickyTabStops": true,
+    "editor.inlineSuggest.enabled": true,
+    "editor.minimap.enabled": false,
+    "editor.bracketPairColorization.enabled": false,
+    "editor.stickyScroll.enabled": true,
+    "editor.accessibilitySupport": "off",
+    "editor.suggest.showStatusBar": true,
+    "files.trimTrailingWhitespace": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.iconTheme": "eq-material-theme-icons-palenight",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#93e6fc",
+        "activityBar.background": "#93e6fc",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#fa45d4",
+        "activityBarBadge.foreground": "#15202b",
+        "commandCenter.border": "#15202b99",
+        "sash.hoverBorder": "#93e6fc",
+        "statusBar.background": "#61dafb",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#2fcefa",
+        "statusBarItem.remoteBackground": "#61dafb",
+        "statusBarItem.remoteForeground": "#15202b",
+        "titleBar.activeBackground": "#61dafb",
+        "titleBar.activeForeground": "#15202b",
+        "titleBar.inactiveBackground": "#61dafb99",
+        "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#61dafb",
+    "launch": {
+        "configurations": [],
+        "compounds": []
+    }
+}

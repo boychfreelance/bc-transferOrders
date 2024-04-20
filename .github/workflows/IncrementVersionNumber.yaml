@@ -23,7 +23,7 @@ permissions:
 
 defaults:
   run:
-    shell: pwsh
+    shell: powershell
 
 env:
   ALGoOrgSettings: ${{ vars.ALGoOrgSettings }}
@@ -34,19 +34,19 @@ jobs:
     runs-on: [ windows-latest ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Initialize the workflow
         id: init
         uses: microsoft/AL-Go-Actions/WorkflowInitialize@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0096"
 
       - name: Increment Version Number
         uses: microsoft/AL-Go-Actions/IncrementVersionNumber@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           project: ${{ github.event.inputs.project }}
           versionNumber: ${{ github.event.inputs.versionNumber }}
@@ -56,6 +56,6 @@ jobs:
         if: always()
         uses: microsoft/AL-Go-Actions/WorkflowPostProcess@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0096"
           telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}

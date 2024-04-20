@@ -29,7 +29,7 @@ jobs:
     if: github.event.pull_request.base.repo.full_name != github.event.pull_request.head.repo.full_name
     runs-on: [ windows-latest ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           lfs: true
           ref: refs/pull/${{ github.event.number }}/merge
@@ -54,7 +54,7 @@ jobs:
       buildOrderJson: ${{ steps.determineProjectsToBuild.outputs.BuildOrderJson }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           lfs: true
           ref: refs/pull/${{ github.event.number }}/merge
@@ -101,7 +101,7 @@ jobs:
       BuildOutputArtifactsName: ${{ steps.calculateArtifactNames.outputs.BuildOutputArtifactsName }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           lfs: true
           ref: refs/pull/${{ github.event.number }}/merge
@@ -244,7 +244,7 @@ jobs:
     if: (!cancelled())
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           lfs: true
           ref: refs/pull/${{ github.event.number }}/merge

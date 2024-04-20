@@ -17,7 +17,7 @@ permissions:
 
 defaults:
   run:
-    shell: pwsh
+    shell: powershell
 
 env:
   ALGoOrgSettings: ${{ vars.ALGoOrgSettings }}
@@ -35,20 +35,20 @@ jobs:
       deviceCode: ${{ steps.Authenticate.outputs.deviceCode }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Initialize the workflow
         id: init
         uses: microsoft/AL-Go-Actions/WorkflowInitialize@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0097"
 
       - name: Read settings
         id: ReadSettings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           getEnvironments: ${{ github.event.inputs.environmentName }}
           includeProduction: 'Y'
@@ -68,7 +68,7 @@ jobs:
         env:
           secrets: ${{ toJson(secrets) }}
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           settingsJson: ${{ env.Settings }}
           secrets: '${{ steps.envName.outputs.envName }}-AuthContext,${{ steps.envName.outputs.envName }}_AuthContext,AuthContext'
@@ -118,7 +118,7 @@ jobs:
       deviceCode: ${{ needs.Initialization.outputs.deviceCode }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: EnvName
         id: envName
@@ -131,21 +131,21 @@ jobs:
       - name: Read settings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
 
       - name: Read secrets
         uses: microsoft/AL-Go-Actions/ReadSecrets@PPPreview
         env:
           secrets: ${{ toJson(secrets) }}
         with:
-          shell: pwsh
+          shell: powershell
           settingsJson: ${{ env.Settings }}
           secrets: '${{ steps.envName.outputs.envName }}-AuthContext,${{ steps.envName.outputs.envName }}_AuthContext,AuthContext,${{ steps.envName.outputs.envName }}-EnvironmentName,${{ steps.envName.outputs.envName }}_EnvironmentName,EnvironmentName,projects'
 
       - name: Get Auth context
         uses: microsoft/AL-Go-Actions/ReadAuthContext@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           envName: ${{ steps.envName.outputs.envName }}
           environment: ${{ steps.envName.outputs.envName }}
 
@@ -154,7 +154,7 @@ jobs:
         env:
           AuthContext: ${{ env.authContext }}
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           type: 'Publish'
           projects: ${{ env.projects }}
@@ -164,7 +164,7 @@ jobs:
       - name: Get Artifacts
         uses: microsoft/AL-Go-Actions/GetArtifacts@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           artifactVersion: ${{ github.event.inputs.appVersion }}
 
@@ -172,7 +172,7 @@ jobs:
         if: ${{ env.deployPP == 'true' }}
         uses: microsoft/AL-Go-Actions/DeployPowerPlatform@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           artifactPath: '.artifacts'
           deploySettings: ${{ env.deployTo }}
@@ -184,12 +184,12 @@ jobs:
     needs: [ Initialization, Deploy ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Finalize the workflow
         id: PostProcess
         uses: microsoft/AL-Go-Actions/WorkflowPostProcess@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0097"
           telemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}

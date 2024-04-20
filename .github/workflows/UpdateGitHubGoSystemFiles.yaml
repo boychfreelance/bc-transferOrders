@@ -11,8 +11,6 @@ on:
         description: Direct COMMIT (Y/N)
         required: false
         default: 'N'
-  schedule:
-    - cron: '0 0 * * *'
 
 permissions:
   contents: read
@@ -30,7 +28,7 @@ jobs:
     runs-on: [ windows-latest ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Initialize the workflow
         id: init

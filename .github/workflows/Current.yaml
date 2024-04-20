@@ -2,15 +2,13 @@ name: ' Test Current'
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 2 * * 1,2,3,4,5'
 
 permissions:
   contents: read
 
 defaults:
   run:
-    shell: pwsh
+    shell: powershell
 
 env:
   workflowDepth: 1
@@ -30,7 +28,7 @@ jobs:
       buildOrderJson: ${{ steps.determineProjectsToBuild.outputs.BuildOrderJson }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           lfs: true
 
@@ -38,21 +36,21 @@ jobs:
         id: init
         uses: microsoft/AL-Go-Actions/WorkflowInitialize@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0101"
 
       - name: Read settings
         id: ReadSettings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
 
       - name: Determine Projects To Build
         id: determineProjectsToBuild
         uses: microsoft/AL-Go-Actions/DetermineProjectsToBuild@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           maxBuildDepth: ${{ env.workflowDepth }}
 
   Build:
@@ -73,7 +71,7 @@ jobs:
       BuildOutputArtifactsName: ${{ steps.calculateArtifactNames.outputs.BuildOutputArtifactsName }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           lfs: true
 
@@ -208,12 +206,12 @@ jobs:
     needs: [ Initialization, Build ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Finalize the workflow
         id: PostProcess
         uses: microsoft/AL-Go-Actions/WorkflowPostProcess@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0101"
           telemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}

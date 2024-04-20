@@ -4,16 +4,16 @@
   "currentSchedule": "0 2 * * 1,2,3,4,5",
   "NextMinorSchedule": "0 2 * * 6",
   "NextMajorSchedule": "0 2 * * 0",
-  "UpdateGitHubGoSystemFilesSchedule": "0 0 * * *",
+
   "shell": "pwsh",
-  "githubRunner": "windows-latest",
+
   "githubRunnerShell": "pwsh",
   "powerPlatformSolutionFolder": "bc-transferOrder",
   "environments": [
     "QA"
   ],
   "DeployToQA": {
-    "environmentName": "Sandbox",
+    "environmentName": "SandboxUS",
     "companyId": "5736fe89-41bc-ee11-907d-6045bdc8c244",
     "ppEnvironmentUrl": "https://orgb2203da6.crm4.dynamics.com/"
   }

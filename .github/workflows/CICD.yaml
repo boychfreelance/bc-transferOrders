@@ -11,7 +11,7 @@ on:
 
 defaults:
   run:
-    shell: pwsh
+    shell: powershell
 
 permissions:
   contents: read
@@ -40,7 +40,7 @@ jobs:
       buildOrderJson: ${{ steps.determineProjectsToBuild.outputs.BuildOrderJson }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           lfs: true
 
@@ -48,14 +48,14 @@ jobs:
         id: init
         uses: microsoft/AL-Go-Actions/WorkflowInitialize@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0091"
 
       - name: Read settings
         id: ReadSettings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           getEnvironments: '*'
 
@@ -63,7 +63,7 @@ jobs:
         id: determineProjectsToBuild
         uses: microsoft/AL-Go-Actions/DetermineProjectsToBuild@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           maxBuildDepth: ${{ env.workflowDepth }}
 
       - name: Determine Delivery Target Secrets
@@ -84,7 +84,7 @@ jobs:
         env:
           secrets: ${{ toJson(secrets) }}
         with:
-          shell: pwsh
+          shell: powershell
           settingsJson: ${{ env.Settings }}
           secrets: ${{ steps.DetermineDeliveryTargetSecrets.outputs.Secrets }}
 
@@ -152,19 +152,19 @@ jobs:
     needs: [ Initialization ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Read settings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           get: templateUrl
 
       - name: Check for updates to AL-Go system files
         uses: microsoft/AL-Go-Actions/CheckForUpdates@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           templateUrl: ${{ env.templateUrl }}
 
@@ -188,7 +188,7 @@ jobs:
       BuildOutputArtifactsName: ${{ steps.calculateArtifactNames.outputs.BuildOutputArtifactsName }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           lfs: true
 
@@ -380,7 +380,7 @@ jobs:
       name: ${{ matrix.environment }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Download artifacts
         uses: actions/download-artifact@v3
@@ -398,14 +398,14 @@ jobs:
       - name: Read settings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
 
       - name: Read secrets
         uses: microsoft/AL-Go-Actions/ReadSecrets@PPPreview
         env:
           secrets: ${{ toJson(secrets) }}
         with:
-          shell: pwsh
+          shell: powershell
           settingsJson: ${{ env.Settings }}
           secrets: '${{ steps.envName.outputs.envName }}-AuthContext,${{ steps.envName.outputs.envName }}_AuthContext,AuthContext,${{ steps.envName.outputs.envName }}-EnvironmentName,${{ steps.envName.outputs.envName }}_EnvironmentName,EnvironmentName,projects'
 
@@ -503,7 +503,7 @@ jobs:
         env:
           AuthContext: ${{ steps.authContext.outputs.authContext }}
         with:
-          shell: pwsh
+          shell: powershell
           type: 'CD'
           projects: ${{ steps.authContext.outputs.projects }}
           environmentName: ${{ steps.authContext.outputs.environmentName }}
@@ -530,7 +530,7 @@ jobs:
     name: Deliver to ${{ matrix.deliveryTarget }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Download artifacts
         uses: actions/download-artifact@v3
@@ -540,14 +540,14 @@ jobs:
       - name: Read settings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
 
       - name: Read secrets
         uses: microsoft/AL-Go-Actions/ReadSecrets@PPPreview
         env:
           secrets: ${{ toJson(secrets) }}
         with:
-          shell: pwsh
+          shell: powershell
           settingsJson: ${{ env.Settings }}
           secrets: '${{ matrix.deliveryTarget }}Context'
 
@@ -566,7 +566,7 @@ jobs:
         env:
           deliveryContext: ${{ steps.deliveryContext.outputs.deliveryContext }}
         with:
-          shell: pwsh
+          shell: powershell
           type: 'CD'
           projects: ${{ needs.Initialization.outputs.projects }}
           deliveryTarget: ${{ matrix.deliveryTarget }}
@@ -578,12 +578,12 @@ jobs:
     needs: [ Initialization, Build, Deploy, Deliver ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Finalize the workflow
         id: PostProcess
         uses: microsoft/AL-Go-Actions/WorkflowPostProcess@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0091"
           telemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}

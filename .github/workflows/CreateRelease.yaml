@@ -45,7 +45,7 @@ concurrency: release
 
 defaults:
   run:
-    shell: pwsh
+    shell: powershell
 
 env:
   ALGoOrgSettings: ${{ vars.ALGoOrgSettings }}
@@ -62,20 +62,20 @@ jobs:
       releaseBranch: ${{ steps.createreleasenotes.outputs.releaseBranch }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Initialize the workflow
         id: init
         uses: microsoft/AL-Go-Actions/WorkflowInitialize@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0094"
 
       - name: Read settings
         id: ReadSettings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           get: templateUrl,repoName
 
@@ -83,12 +83,12 @@ jobs:
         id: determineProjects
         uses: microsoft/AL-Go-Actions/DetermineProjectsToBuild@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
 
       - name: Check for updates to AL-Go system files
         uses: microsoft/AL-Go-Actions/CheckForUpdates@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           templateUrl: ${{ env.templateUrl }}
 
@@ -179,7 +179,7 @@ jobs:
         id: createreleasenotes
         uses: microsoft/AL-Go-Actions/CreateReleaseNotes@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           tag_name: ${{ github.event.inputs.tag }}
 
@@ -216,12 +216,12 @@ jobs:
       fail-fast: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Read settings
         uses: microsoft/AL-Go-Actions/ReadSettings@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ needs.CreateRelease.outputs.telemetryScopeJson }}
 
       - name: Read secrets
@@ -229,7 +229,7 @@ jobs:
         env:
           secrets: ${{ toJson(secrets) }}
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ needs.CreateRelease.outputs.telemetryScopeJson }}
           settingsJson: ${{ env.Settings }}
           secrets: 'nuGetContext,storageContext'
@@ -282,7 +282,7 @@ jobs:
         env:
           deliveryContext: ${{ steps.nuGetContext.outputs.nuGetContext }}
         with:
-          shell: pwsh
+          shell: powershell
           type: 'Release'
           projects: ${{ matrix.project }}
           deliveryTarget: 'NuGet'
@@ -307,7 +307,7 @@ jobs:
         env:
           deliveryContext: ${{ steps.storageContext.outputs.storageContext }}
         with:
-          shell: pwsh
+          shell: powershell
           type: 'Release'
           projects: ${{ matrix.project }}
           deliveryTarget: 'Storage'
@@ -320,7 +320,7 @@ jobs:
     needs: [ CreateRelease, UploadArtifacts ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           ref: '${{ needs.createRelease.outputs.commitish }}'
 
@@ -342,7 +342,7 @@ jobs:
       - name: Update Version Number
         uses: microsoft/AL-Go-Actions/IncrementVersionNumber@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           parentTelemetryScopeJson: ${{ needs.CreateRelease.outputs.telemetryScopeJson }}
           versionNumber: ${{ github.event.inputs.updateVersionNumber }}
           directCommit: ${{ github.event.inputs.directCommit }}
@@ -353,12 +353,12 @@ jobs:
     needs: [ CreateRelease, UploadArtifacts, CreateReleaseBranch, UpdateVersionNumber ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Finalize the workflow
         id: PostProcess
         uses: microsoft/AL-Go-Actions/WorkflowPostProcess@PPPreview
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0094"
           telemetryScopeJson: ${{ needs.CreateRelease.outputs.telemetryScopeJson }}

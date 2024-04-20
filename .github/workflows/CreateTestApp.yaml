@@ -12,14 +12,14 @@ on:
       name:
         description: Name
         required: true
-        default: '<YourAppName>.Test'
+        default: '<YourAppName>.Test'         
       publisher:
         description: Publisher
         required: true
       idrange:
         description: ID range
         required: true
-        default: '50000..99999'
+        default: '50000..99999'  
       sampleCode:
         description: Include Sample code (Y/N)
         required: false
@@ -46,7 +46,7 @@ jobs:
     runs-on: [ windows-latest ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Initialize the workflow
         id: init

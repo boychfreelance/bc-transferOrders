@@ -12,6 +12,14 @@
   "environments": [
     "QA"
   ],
+  "CICDPushBranches": [ 
+    "main", 
+    "release/*", 
+    "feature/*" 
+  ],
+  "CICDPullRequestBranches":[
+    "main"
+  ],
   "DeployToQA": {
     "environmentName": "SandboxUS",
     "companyId": "5736fe89-41bc-ee11-907d-6045bdc8c244",

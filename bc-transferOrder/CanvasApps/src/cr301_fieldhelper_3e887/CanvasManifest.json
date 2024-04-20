@@ -118,13 +118,13 @@
     "InstrumentationKey": "",
     "LocalDatabaseReferences": "",
     "ManualOfflineProfileId": "",
-    "Name": "BC Transfer Order",
+    "Name": "Transfer Order",
     "OriginatingVersion": "1.330",
     "ParserErrorCount": 0,
     "ShowStatusBar": false
   },
   "PublishInfo": {
-    "AppName": "bc-transferOrder",
+    "AppName": "Transfer Order",
     "BackgroundColor": "rgba(255, 255, 255, 1)",
     "IconColor": "RGBA(255,255,255,1)",
     "IconName": "",
